@@ -1,35 +1,24 @@
 # 2-5g-3-J
 # 2-5G-3J
 def key_formatting(license_key, k):
-    count = 0
+    length = len(license_key)
+    first_group_len = length % k
 
-    license_key = license_key.upper()
-    license_key = license_key.replace('-', "")
+    license_key = license_key.upper().replace('-', "")
+    first_group = license_key[:first_group_len+1] + '-'
 
-    for i in license_key:
-        count+=1
+    remaining_groups = ""
+    for idx, val in enumerate(license_key[first_group_len+1:]):
+        if (idx + 1) % k == 0:
+            remaining_groups += val
+            remaining_groups += '-'
+        else:
+            remaining_groups += val
 
-    quotient = count // k
-    rest = count % k
+    if (remaining_groups[-1] == '-'):
+        remaining_groups = remaining_groups[:-1]
 
-    remaning_groups = ""
-    curr_count = 0
-    for val in license_key[rest:]:
-        if curr_count == k
-            curr_count = 0
-            remaning_groups.concat("-")
-        
-        remaning_groups.concat(val)
-    
-    del remaning_groups[-1]
+    return first_group + remaining_groups
 
-    first_group = ""
-    if rest != 0:
-        for i in range(rest):
-            first_group.concat(i)
-        first_group.concat("-")
-
-    result = first_group.concat(remaning_groups)
- return result
-
-key_formatting("2-5g-3-J")
+if __name__ == '__main__':
+    print(key_formatting("2-5g-3-J", 2))
